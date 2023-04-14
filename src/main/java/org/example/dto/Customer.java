@@ -1,4 +1,7 @@
-package org.example.demo;
+package org.example.dto;
+
+import org.example.service.Register;
+
 /**********************************************************************************************************
  * Now we are using inversion of flow b/c tight coupling is still there after introducing abstraction.
  * The customer object got created first then CurrentAccount was created .
@@ -14,7 +17,7 @@ public class Customer{
 
     private AccountType accountType ;
 
-   private  Register register ;
+   private Register register ;
 
     public Customer(){
 
@@ -43,14 +46,26 @@ public class Customer{
 
     public String registerAccount() {
         String msg ;
+        String accountType;
 
-        if (register.registerToAccount()){
+        System.out.println("Customer Name :" + ""+ getCustomerName());
+        System.out.println("Customer Age :" + ""+ getCustomerAge());
 
-            msg = "The customer"+" " + this.customerName+" "+ "is registered to Account";
+        accountType = register.registerToAccount();
 
-          } else{
-            msg = "The customer is not registered yet";
+        if (accountType.equals("Current Account")){
+
+                msg = "Customer registered to : "+" " + accountType;
+
+          } else if (accountType.equals("Savings Account")){
+
+                msg = "Customer registered to : "+" " + accountType;
+
+           }  else{
+
+                msg = "The customer is not registered yet";
           }
+
            return msg;
 
     }

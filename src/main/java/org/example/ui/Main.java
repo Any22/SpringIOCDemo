@@ -7,30 +7,31 @@
  * Solution : The most common way is Abstraction which makes the concept of loosely coupled application  possible .
  *******************************************************************************************************************/
 
-package org.example.demo;
+package org.example.ui;
+import org.example.config.SpringConfig;
+import org.example.service.CurrentAccount;
+import org.example.dto.Customer;
+import org.example.service.Register;
+import org.example.service.SavingsAccount;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.example.config.SpringConfig;
-
 
 public class Main {
     public static void main(String[] args) {
+
        ApplicationContext applicationContext ;
        applicationContext= new AnnotationConfigApplicationContext(SpringConfig.class);
 
       // Implementing Inversion of control by creating register object first
 
-       Register register = new CurrentAccount();
-
+      // Register register = new CurrentAccount();
+        Register register = new SavingsAccount();
        Customer customer = applicationContext.getBean(Customer.class);
 
        customer.setCustomerName("Jonas");
        customer.setCustomerAge(34);
        customer.setRegister(register);
-
-        System.out.println("Customer Name :" + ""+ customer.getCustomerName());
-        System.out.println("Customer Age :" + ""+ customer.getCustomerAge());
-        System.out.println(customer.registerAccount());
+       System.out.println(customer.registerAccount());
 
 
        
